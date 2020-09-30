@@ -13,6 +13,6 @@
 
 ### This project consists of 3 parts:
 
-## 1. [Distributed Synchronous Value Iteration](https://github.com/csdankim/Intelli_Agent_Decision_Making/blob/master/1.%20Distributed%20Synchronous%20Value%20Iteration/README.md)
-## 2. [Distributed Q-Learning and SARSA](https://github.com/csdankim/Intelli_Agent_Decision_Making/blob/master/2.%20Distributed%20Q-Learning%20and%20SARSA/README.md)
-## 3. [Distributed Deep Q-Learning](https://github.com/csdankim/Intelli_Agent_Decision_Making/blob/master/3.%20Distributed%20Deep%20Q-Learning/README.md)
+## 1. [Distributed Synchronous Value Iteration](https://github.com/csdankim/Intelli_Agent_Decision_Making/tree/master/1.%20Distributed%20Synchronous%20Value%20Iteration)
+## 2. [Distributed Q-Learning and SARSA](https://github.com/csdankim/Intelli_Agent_Decision_Making/tree/master/2.%20Distributed%20Q-Learning%20and%20SARSA)
+## 3. [Distributed Deep Q-Learning](https://github.com/csdankim/Intelli_Agent_Decision_Making/tree/master/3.%20Distributed%20Deep%20Q-Learning)

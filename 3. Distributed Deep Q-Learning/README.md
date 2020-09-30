@@ -1,4 +1,4 @@
-# Distributed Deep Q-Learning 
+# [Distributed Deep Q-Learning](https://github.com/csdankim/Intelli_Agent_Decision_Making/blob/master/3.%20Distributed%20Deep%20Q-Learning/hw4_v5.ipynb) 
 
 The goal of this assignment is to implement and experiment with both single-core and distributed versions of the deep reinforcement learning algorithm Deep Q Networks (DQN). In particular, DQN will be run in the classic RL benchmark Cart-Pole and abblation experiments will be run to observe the impact of the different DQN components. 
 
