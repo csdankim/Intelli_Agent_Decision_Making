@@ -1,58 +1,6 @@
-
 # coding: utf-8
 
 # # Distributed Synchronous Value Iteration
-# ***
-# 
-# The goal of this assignment is to implement both single-core and distributed versions of syncronous value iteration (VI). In particuar, VI will be applied to Markov Decision Processes (MDPs) in order to compute policies that optimize expected infinite horizon discounted cummulative reward. 
-# 
-# The relevant content about MDPs and VI are in the following course notes from CS533. 
-# 
-# https://oregonstate.instructure.com/courses/1719746/files/74716197/download?wrap=1
-# https://oregonstate.instructure.com/courses/1719746/files/74828408/download?wrap=1
-# 
-# 
-# ### Synchronous Value Iteration Recap
-# 
-# Below is a review of the synchronous value iteration algorithm. The algorithm is iterative and each iteration produces a newly updated value function $V_{new}$ based on the value function from the previous iteration $V_{curr}$. This is done by applying the Bellman backup operator to $V_{curr}$ at each state. That is, 
-# \begin{equation}
-# V_{new}(s) = \max_{a\in A} R(s,a) + \beta \sum_{s'\in S} T(s,a,s') V_{curr}(s')
-# \end{equation}
-# where $\beta \in [0,1)$ is the discount factor, $R$ is the reward function, and $T$ is the transition function. 
-# 
-# The algorithm also maintains the greedy policy $\pi$ at each iteration, which is based on a one-step look ahead operator: 
-# \begin{equation}
-# \pi_{curr}(s) = \arg\max_{a\in A} R(s,a) + \beta \sum_{s'\in S} T(s,a,s') V_{curr}(s')
-# \end{equation}
-# 
-# After an update we define the Bellman error of that iteration as $\max_s |V_{new}(s)-V_{curr}(s)|$. In the notes, it is shown that this error allows us to bound the difference between the value function of $\pi_{curr}$ and the optimal value function $V^{*}$. Thus, a typical stopping condition for VI is to iterate until the Bellman error is below a specified threshold $\epsilon$. Putting everything together, the overall algorithm is as follows:
-# 
-# - Start with $V_{curr}(s) = 0$ for all $s$
-# - error = $\infty$
-# - While error > $\epsilon$ 
-#     - For each state $s$ 
-#         - $V_{new}(s) = \max_{a\in A} R(s,a) + \beta \sum_{s'\in S} T(s,a,s') V_{curr}(s')$
-#         - $\pi_{curr}(s) = \arg\max_{a\in A} R(s,a) + \beta \sum_{s'\in S} T(s,a,s') V_{curr}(s')$
-#     - error = $\max_s |V_{new}(s)-V_{curr}(s)|$   ;; could do this incrementally      
-#     - $V_{curr} = V_{new}$
-# 
-# The reason we refer to this version of VI as synchronous is because it maintains both a current and new value function, where all values of the new value function are computed based on the fixed current value function. That is, each iteration updates all states based on the value function of the previous iteration. 
-# 
-# To simplify this first assignment, we have decided to focus on Synchronous VI and to investigate how to best create a distributed implementation using the Ray framework. In particular, a distributed version of Synchronous VI should still produce a sequence of value functions and policies that are equivalent to those that would be produced by a single-core version, but ideally do so much faster. The remainder of this notebook guides you through some of the MDP mechanics and algorithm implementations. The grand finale of this first assignment is a competition where you will try to develop the fasted distributed implementation that you can. 
-
-# In[1]:
-
-
-# You will need to uncomment the following pip commands if the libraries need to be installed. 
-# You may get some errors related to readchar, but they should not break the project.
-
-#!pip install --user readchar
-#!pip install --user gym
-
-
-# In[82]:
-
-
 import ray
 import time
 from copy import deepcopy
